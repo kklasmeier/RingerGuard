@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RingerGuard" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/rg_green</item>
+        <item name="colorPrimaryContainer">@color/rg_surface</item>
+        <item name="android:colorBackground">@color/rg_background</item>
+        <item name="android:statusBarColor">@color/rg_surface</item>
+        <item name="android:navigationBarColor">@color/rg_background</item>
+        <item name="android:windowBackground">@color/rg_background</item>
+    </style>
+</resources>

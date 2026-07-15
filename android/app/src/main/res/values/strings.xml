@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RingerGuard</string>
+    <string name="developer_name">Kevin Klasmeier</string>
+    <string name="widget_description">Quickly silence or restore your ringer with a countdown timer.</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_log">Log</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_settings">Settings</string>
+
+    <string name="status_ringing">Ringing — Your ringer is active</string>
+    <string name="status_silenced">Silenced — %1$s remaining</string>
+    <string name="status_indefinite">Indefinite — Silence until re-enabled</string>
+
+    <string name="action_silence_duration">Silence %1$d min</string>
+    <string name="action_indefinite">Indefinite</string>
+    <string name="action_ring_now">Ring Now</string>
+    <string name="action_custom_duration">Custom Duration</string>
+
+    <string name="notification_channel_name">RingerGuard Service</string>
+    <string name="notification_channel_desc">Shows ringer protection status</string>
+    <string name="notification_ringing_title">RingerGuard Active</string>
+    <string name="notification_ringing_text">Ringer will be protected</string>
+    <string name="notification_silenced_title">Silenced — %1$s remaining</string>
+    <string name="notification_silenced_text">Tap to open app</string>
+    <string name="notification_indefinite_title">Silenced Indefinitely</string>
+    <string name="notification_indefinite_text">Tap to re-enable</string>
+
+    <string name="widget_ringing">Ringing</string>
+    <string name="widget_silenced">Silenced</string>
+    <string name="widget_indefinite">Indefinite</string>
+    <string name="widget_countdown_label">minutes remaining</string>
+    <string name="widget_indefinite_label">silence until re-enabled</string>
+
+    <string name="setup_banner_title">Setup required</string>
+    <string name="setup_banner_battery">Allow unrestricted battery use so RingerGuard can restore your ringer reliably.</string>
+    <string name="setup_banner_exact_alarm">Allow exact alarms so scheduled checks work in battery saver mode.</string>
+    <string name="setup_banner_dnd">Grant Do Not Disturb access to restore ringer after DND is enabled.</string>
+    <string name="setup_fix">Fix</string>
+
+    <string name="welcome_title">Welcome to RingerGuard</string>
+    <string name="welcome_body">RingerGuard keeps your ringer on unless you explicitly silence it. After a grace period, it restores volume automatically.</string>
+
+    <string name="phone_disclosure_title">Why RingerGuard needs phone access</string>
+    <string name="phone_disclosure_body">RingerGuard detects when you dismiss an incoming call (without answering) so it can start a grace period before restoring your ringer.\n\nRingerGuard does not access your phone number, call history, or contacts. This permission is optional.</string>
+    <string name="phone_disclosure_continue">Continue</string>
+    <string name="phone_disclosure_cancel">Not now</string>
+
+    <string name="live_volume">Ringer volume</string>
+    <string name="live_dnd">Do Not Disturb</string>
+    <string name="live_vibrate">Vibrate only</string>
+    <string name="live_service">Service running</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+
+    <string name="clear_log">Clear Log</string>
+    <string name="clear_log_confirm">Clear all log entries?</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string name="quiet_hours">Quiet Hours</string>
+    <string name="quiet_hours_enable">Enable Quiet Hours</string>
+    <string name="quiet_hours_start">Start time</string>
+    <string name="quiet_hours_end">End time</string>
+    <string name="active_days">Active Days</string>
+
+    <string name="settings_grace_period">Grace period</string>
+    <string name="settings_restore_volume">Restore volume level</string>
+    <string name="settings_check_interval">Check interval</string>
+    <string name="settings_restore_dnd">Disable Do Not Disturb on restore</string>
+    <string name="settings_restore_vibrate">Disable vibrate-only on restore</string>
+    <string name="settings_grace_volume">Start grace period on volume change</string>
+    <string name="settings_grace_call">Start grace period on call dismiss</string>
+    <string name="settings_system_health">System Health</string>
+    <string name="settings_battery">Battery optimization</string>
+    <string name="settings_dnd_access">DND access</string>
+    <string name="settings_exact_alarm">Exact alarm permission</string>
+    <string name="settings_phone_state">Phone state permission</string>
+    <string name="settings_uptime">Service uptime</string>
+    <string name="settings_last_restore">Last auto-restore</string>
+    <string name="settings_samsung_tip">On Samsung devices, also set Settings → Battery → Unrestricted for RingerGuard.</string>
+    <string name="settings_active">Active</string>
+    <string name="settings_inactive">Inactive</string>
+    <string name="settings_granted">Granted</string>
+    <string name="settings_not_granted">Not granted</string>
+    <string name="settings_never">Never</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <string name="status_active_hours">Right now: Active hours</string>
+    <string name="status_quiet_hours">Right now: Quiet hours</string>
+</resources>

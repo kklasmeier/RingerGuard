@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/rg_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/rg_surface"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_grace_period"
+                    android:textColor="@color/rg_text_primary" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider_grace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:valueFrom="0"
+                    android:valueTo="4" />
+
+                <TextView
+                    android:id="@+id/grace_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_restore_volume"
+                    android:textColor="@color/rg_text_primary" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1"
+                    android:valueFrom="1"
+                    android:valueTo="15" />
+
+                <TextView
+                    android:id="@+id/volume_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_check_interval"
+                    android:textColor="@color/rg_text_primary" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggle_check_interval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/interval_5"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5m" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/interval_10"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="10m" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/interval_15"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="15m" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/interval_30"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="30m" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_restore_dnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_restore_dnd" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_restore_vibrate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_restore_vibrate" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_grace_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_grace_volume" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_grace_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_grace_call" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/rg_surface"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_system_health"
+                    android:textColor="@color/rg_text_primary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/health_battery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/health_dnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/health_exact_alarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/health_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/health_uptime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/health_last_restore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/settings_samsung_tip"
+                    android:textColor="@color/rg_orange"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/rg_surface"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_about"
+                    android:textColor="@color/rg_text_primary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/about_developer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/rg_text_secondary" />
+
+                <TextView
+                    android:id="@+id/about_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/rg_text_secondary" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
