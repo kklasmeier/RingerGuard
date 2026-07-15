@@ -10,9 +10,12 @@ object RingerStatusHelper {
         val currentVolume: Int,
         val maxVolume: Int,
         val dndOn: Boolean,
-        val vibrateOnly: Boolean,
+        val isSilent: Boolean,
+        val isVibrate: Boolean,
         val serviceRunning: Boolean,
-    )
+    ) {
+        val vibrateOnly: Boolean get() = isSilent || isVibrate
+    }
 
     fun read(context: Context): LiveStatus {
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -21,8 +24,8 @@ object RingerStatusHelper {
 
         @Suppress("DEPRECATION")
         val ringerMode = audioManager.ringerMode
-        val vibrateOnly = ringerMode == AudioManager.RINGER_MODE_VIBRATE ||
-            ringerMode == AudioManager.RINGER_MODE_SILENT
+        val isSilent = ringerMode == AudioManager.RINGER_MODE_SILENT
+        val isVibrate = ringerMode == AudioManager.RINGER_MODE_VIBRATE
 
         val dndOn = if (PermissionHelper.hasDndAccess(context)) {
             val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -35,6 +38,10 @@ object RingerStatusHelper {
         val serviceRunning = activityManager.getRunningServices(Int.MAX_VALUE)
             .any { it.service.className == RingerService::class.java.name }
 
-        return LiveStatus(currentVolume, maxVolume, dndOn, vibrateOnly, serviceRunning)
+        return LiveStatus(currentVolume, maxVolume, dndOn, isSilent, isVibrate, serviceRunning)
+    }
+
+    fun isUserRingerEnabled(status: LiveStatus): Boolean {
+        return !status.isSilent && !status.isVibrate && status.currentVolume > 0
     }
 }

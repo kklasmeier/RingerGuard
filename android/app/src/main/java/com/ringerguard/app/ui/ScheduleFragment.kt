@@ -65,6 +65,8 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
                 text = label
                 isCheckable = true
                 isChecked = dayValue in activeDays
+                chipMinHeight = resources.getDimension(R.dimen.day_chip_min_height)
+                textSize = 11f
             }
             chips.add(chip)
             binding.dayChipGroup.addView(chip)

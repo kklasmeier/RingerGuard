@@ -7,6 +7,8 @@ object RingerGuardPrefs {
     const val GRACE_UNTIL_MS = "grace_until_ms"
     const val GRACE_DURATION_MIN = "grace_duration_min"
     const val RESTORE_VOLUME_LEVEL = "restore_volume_level"
+    const val RESTORE_PRESERVE_VOLUME = "restore_preserve_volume"
+    const val VOLUME_BEFORE_SILENCE = "volume_before_silence"
     const val CHECK_INTERVAL_MIN = "check_interval_min"
     const val RESTORE_DISABLE_DND = "restore_disable_dnd"
     const val RESTORE_DISABLE_VIBRATE = "restore_disable_vibrate"

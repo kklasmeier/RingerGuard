@@ -7,5 +7,57 @@
         <item name="android:statusBarColor">@color/rg_surface</item>
         <item name="android:navigationBarColor">@color/rg_background</item>
         <item name="android:windowBackground">@color/rg_background</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+
+    <style name="RingerGuard.Button.Silence" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/rg_orange</item>
+        <item name="android:textColor">@color/rg_orange</item>
+        <item name="backgroundTint">@color/rg_status_orange_bg</item>
+        <item name="iconGravity">textTop</item>
+        <item name="iconPadding">4dp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="RingerGuard.Button.Indefinite" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/rg_purple</item>
+        <item name="android:textColor">@color/rg_purple</item>
+        <item name="backgroundTint">@color/rg_status_purple_bg</item>
+        <item name="iconGravity">textTop</item>
+        <item name="iconPadding">4dp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="RingerGuard.Button.EnableRinger" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/rg_green</item>
+        <item name="android:textColor">@color/rg_green</item>
+        <item name="backgroundTint">@color/rg_status_green_bg</item>
+        <item name="iconGravity">textTop</item>
+        <item name="iconPadding">4dp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="RingerGuard.Button.CustomDuration" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/rg_text_secondary</item>
+        <item name="android:textColor">@color/rg_text_primary</item>
+        <item name="iconGravity">textTop</item>
+        <item name="iconPadding">4dp</item>
+        <item name="android:minHeight">76dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>

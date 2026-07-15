@@ -22,12 +22,20 @@ class AppPreferences(context: Context) {
         get() = prefs.getInt(RingerGuardPrefs.RESTORE_VOLUME_LEVEL, -1)
         set(value) = prefs.edit().putInt(RingerGuardPrefs.RESTORE_VOLUME_LEVEL, value).apply()
 
+    var restorePreserveVolume: Boolean
+        get() = prefs.getBoolean(RingerGuardPrefs.RESTORE_PRESERVE_VOLUME, false)
+        set(value) = prefs.edit().putBoolean(RingerGuardPrefs.RESTORE_PRESERVE_VOLUME, value).apply()
+
+    var volumeBeforeSilence: Int
+        get() = prefs.getInt(RingerGuardPrefs.VOLUME_BEFORE_SILENCE, -1)
+        set(value) = prefs.edit().putInt(RingerGuardPrefs.VOLUME_BEFORE_SILENCE, value).apply()
+
     var checkIntervalMin: Int
         get() = prefs.getInt(RingerGuardPrefs.CHECK_INTERVAL_MIN, 5)
         set(value) = prefs.edit().putInt(RingerGuardPrefs.CHECK_INTERVAL_MIN, value).apply()
 
     var restoreDisableDnd: Boolean
-        get() = prefs.getBoolean(RingerGuardPrefs.RESTORE_DISABLE_DND, true)
+        get() = prefs.getBoolean(RingerGuardPrefs.RESTORE_DISABLE_DND, false)
         set(value) = prefs.edit().putBoolean(RingerGuardPrefs.RESTORE_DISABLE_DND, value).apply()
 
     var restoreDisableVibrate: Boolean

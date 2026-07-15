@@ -34,6 +34,8 @@ object ServiceScheduler {
     }
 
     fun scheduleWidgetTick(context: Context) {
+        val prefs = AppPreferences(context)
+        val delayMs = if (prefs.silenceMode == RingerGuardPrefs.SILENCE_TIMED) 30_000L else 60_000L
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             action = RingerGuardPrefs.ACTION_WIDGET_TICK
@@ -44,7 +46,7 @@ object ServiceScheduler {
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
-        val triggerAt = SystemClock.elapsedRealtime() + 60_000L
+        val triggerAt = SystemClock.elapsedRealtime() + delayMs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && PermissionHelper.canScheduleExactAlarms(context)) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAt, pendingIntent)
         } else {

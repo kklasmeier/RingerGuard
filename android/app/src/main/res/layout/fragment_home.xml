@@ -28,11 +28,20 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/setup_banner_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/setup_banner_title"
                     android:textColor="@color/rg_orange"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/setup_banner_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/rg_text_secondary"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/setup_banner_text"
@@ -46,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/setup_fix" />
+                    android:text="@string/setup_continue" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -60,14 +69,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/status_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/widget_status_indicator"
+                    android:src="@drawable/ic_ringer_on_24" />
 
                 <TextView
                     android:id="@+id/status_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/status_ringing"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/status_ringer_on"
                     android:textColor="@color/rg_green"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -76,7 +95,8 @@
                     android:id="@+id/status_countdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
                     android:textColor="@color/rg_text_primary"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -92,43 +112,89 @@
             android:textColor="@color/rg_text_secondary" />
 
         <LinearLayout
+            android:id="@+id/quick_actions_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_silence_timed"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:text="@string/action_silence_duration" />
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_silence_indefinite"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_silence_timed"
+                    style="@style/RingerGuard.Button.Silence"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/action_silence_duration"
+                    app:icon="@drawable/ic_ringer_off_24"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/rg_orange" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_silence_indefinite"
+                    style="@style/RingerGuard.Button.Indefinite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/action_indefinite"
+                    app:icon="@drawable/ic_indefinite_24"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/rg_purple" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/action_indefinite" />
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_ring_now"
+                    style="@style/RingerGuard.Button.EnableRinger"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/action_ring_now_short"
+                    app:icon="@drawable/ic_ringer_on_24"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/rg_green" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_custom_duration"
+                    style="@style/RingerGuard.Button.CustomDuration"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/action_custom_duration"
+                    app:icon="@drawable/ic_schedule_24"
+                    app:iconSize="22dp"
+                    app:iconTint="@color/rg_text_secondary" />
+            </LinearLayout>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/quick_actions_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/rg_orange"
+                app:trackColor="@color/rg_surface" />
         </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_ring_now"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/action_ring_now" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_custom_duration"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/action_custom_duration" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -179,5 +245,14 @@
                     android:textColor="@color/rg_text_secondary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/app_version_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:textColor="@color/rg_text_secondary"
+            android:textSize="12sp" />
     </LinearLayout>
 </ScrollView>

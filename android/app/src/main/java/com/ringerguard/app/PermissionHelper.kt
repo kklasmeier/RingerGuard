@@ -15,7 +15,6 @@ import androidx.core.net.toUri
 enum class SetupIssue {
     BATTERY,
     EXACT_ALARM,
-    DND,
 }
 
 object PermissionHelper {
@@ -66,19 +65,25 @@ object PermissionHelper {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    /** Required setup only — DND is optional and never included here. */
     fun firstSetupIssue(context: Context): SetupIssue? {
         if (!hasBatteryExemption(context)) return SetupIssue.BATTERY
         if (!canScheduleExactAlarms(context)) return SetupIssue.EXACT_ALARM
-        val prefs = AppPreferences(context)
-        if (prefs.restoreDisableDnd && !hasDndAccess(context)) return SetupIssue.DND
         return null
+    }
+
+    fun requiredSetupStep(context: Context): Pair<Int, Int>? {
+        return when (firstSetupIssue(context)) {
+            SetupIssue.BATTERY -> 1 to 2
+            SetupIssue.EXACT_ALARM -> 2 to 2
+            null -> null
+        }
     }
 
     fun openSetupIssue(context: Context, issue: SetupIssue) {
         when (issue) {
             SetupIssue.BATTERY -> requestBatteryExemption(context)
             SetupIssue.EXACT_ALARM -> requestExactAlarmPermission(context)
-            SetupIssue.DND -> requestDndAccess(context)
         }
     }
 }

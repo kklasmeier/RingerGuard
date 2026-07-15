@@ -6,15 +6,29 @@ import android.media.AudioManager
 import com.ringerguard.app.BuildConfig
 
 object RingerRestoreHelper {
+    fun silenceDevice(context: Context) {
+        val prefs = AppPreferences(context)
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING)
+        if (currentVolume > 0) {
+            prefs.volumeBeforeSilence = currentVolume
+        }
+        prefs.isRestoringVolume = true
+        try {
+            audioManager.setStreamVolume(AudioManager.STREAM_RING, 0, 0)
+            @Suppress("DEPRECATION")
+            audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+        } finally {
+            prefs.isRestoringVolume = false
+        }
+        RingerDisplayHelper.refreshAllSurfaces(context)
+    }
+
     fun restoreRinger(context: Context, detail: String = "scheduled check") {
         val prefs = AppPreferences(context)
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING)
-        val targetVolume = if (prefs.restoreVolumeLevel <= 0) {
-            maxVolume
-        } else {
-            prefs.restoreVolumeLevel.coerceIn(1, maxVolume)
-        }
+        val targetVolume = resolveRestoreVolume(prefs, maxVolume)
 
         prefs.isRestoringVolume = true
         try {
@@ -53,7 +67,7 @@ object RingerRestoreHelper {
         val prefs = AppPreferences(context)
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING)
-        val targetVolume = if (prefs.restoreVolumeLevel <= 0) maxVolume else prefs.restoreVolumeLevel.coerceIn(1, maxVolume)
+        val targetVolume = resolveRestoreVolume(prefs, maxVolume)
         val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_RING)
 
         @Suppress("DEPRECATION")
@@ -75,7 +89,18 @@ object RingerRestoreHelper {
         val prefs = AppPreferences(context)
         val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_RING)
-        return if (prefs.restoreVolumeLevel <= 0) maxVolume else prefs.restoreVolumeLevel.coerceIn(1, maxVolume)
+        return resolveRestoreVolume(prefs, maxVolume)
+    }
+
+    private fun resolveRestoreVolume(prefs: AppPreferences, maxVolume: Int): Int {
+        if (prefs.restorePreserveVolume && prefs.volumeBeforeSilence > 0) {
+            return prefs.volumeBeforeSilence.coerceIn(1, maxVolume)
+        }
+        return if (prefs.restoreVolumeLevel <= 0) {
+            maxVolume
+        } else {
+            prefs.restoreVolumeLevel.coerceIn(1, maxVolume)
+        }
     }
 
     fun logDebug(message: String) {

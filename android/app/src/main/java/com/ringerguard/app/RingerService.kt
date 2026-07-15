@@ -76,7 +76,7 @@ class RingerService : Service() {
 
     private fun ensureReceiversRegistered() {
         if (receiversRegistered) return
-        registerReceiver(volumeReceiver, IntentFilter(VOLUME_CHANGED_ACTION))
+        registerReceiver(volumeReceiver, VolumeChangeReceiver.intentFilter())
         if (AppPreferences(this).callDismissEnabled) {
             registerCallStateReceiver()
         }
@@ -106,8 +106,6 @@ class RingerService : Service() {
     }
 
     companion object {
-        private const val VOLUME_CHANGED_ACTION = "android.media.VOLUME_CHANGED_ACTION"
-
         fun start(context: android.content.Context) {
             val intent = Intent(context, RingerService::class.java)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -170,8 +168,8 @@ object NotificationHelper {
                     context.getString(R.string.notification_indefinite_text)
             }
             else -> {
-                context.getString(R.string.notification_ringing_title) to
-                    context.getString(R.string.notification_ringing_text)
+                val display = RingerDisplayHelper.resolve(context)
+                display.badgeText to context.getString(R.string.notification_ringing_text)
             }
         }
 

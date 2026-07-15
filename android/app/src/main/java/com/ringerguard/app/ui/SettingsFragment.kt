@@ -3,16 +3,20 @@ package com.ringerguard.app.ui
 import android.Manifest
 import android.media.AudioManager
 import android.os.Bundle
+import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ringerguard.app.AppPreferences
 import com.ringerguard.app.BuildConfig
+import com.ringerguard.app.DeviceHelper
 import com.ringerguard.app.PermissionHelper
 import com.ringerguard.app.R
 import com.ringerguard.app.RingerGuardPrefs
 import com.ringerguard.app.RingerService
 import com.ringerguard.app.ServiceScheduler
+import com.ringerguard.app.SetupUiHelper
 import com.ringerguard.app.databinding.FragmentSettingsBinding
 import java.util.concurrent.TimeUnit
 
@@ -20,18 +24,24 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private val phonePermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) { granted ->
-        val prefs = AppPreferences(requireContext())
-        prefs.callDismissEnabled = granted
-        if (granted) {
-            RingerService.start(requireContext())
-        } else {
-            binding.switchGraceCall.isChecked = false
-            prefs.graceOnCallDismiss = false
+    private lateinit var phonePermissionLauncher: ActivityResultLauncher<String>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        phonePermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission(),
+        ) { granted ->
+            if (_binding == null) return@registerForActivityResult
+            val prefs = AppPreferences(requireContext())
+            prefs.callDismissEnabled = granted
+            if (granted) {
+                RingerService.start(requireContext())
+            } else {
+                binding.switchGraceCall.isChecked = false
+                prefs.graceOnCallDismiss = false
+            }
+            refreshHealth()
         }
-        refreshHealth()
     }
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
@@ -67,6 +77,13 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         }
 
+        binding.switchRestorePreserveVolume.isChecked = prefs.restorePreserveVolume
+        updateRestoreVolumeControls(prefs.restorePreserveVolume, maxVolume)
+        binding.switchRestorePreserveVolume.setOnCheckedChangeListener { _, checked ->
+            prefs.restorePreserveVolume = checked
+            updateRestoreVolumeControls(checked, maxVolume)
+        }
+
         binding.toggleCheckInterval.check(
             when (prefs.checkIntervalMin) {
                 10 -> R.id.interval_10
@@ -92,9 +109,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.switchGraceCall.isChecked = prefs.graceOnCallDismiss && prefs.callDismissEnabled
 
         binding.switchRestoreDnd.setOnCheckedChangeListener { _, checked ->
-            prefs.restoreDisableDnd = checked
-            if (checked && !PermissionHelper.hasDndAccess(context)) {
-                PermissionHelper.requestDndAccess(context)
+            if (checked) {
+                SetupUiHelper.showDndExplanation(
+                    context,
+                    onOpenSettings = {
+                        prefs.restoreDisableDnd = true
+                        PermissionHelper.requestDndAccess(context)
+                    },
+                    onSkip = {
+                        binding.switchRestoreDnd.isChecked = false
+                        prefs.restoreDisableDnd = false
+                    },
+                )
+            } else {
+                prefs.restoreDisableDnd = false
             }
         }
         binding.switchRestoreVibrate.setOnCheckedChangeListener { _, checked ->
@@ -125,6 +153,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun updateRestoreVolumeControls(preserveVolume: Boolean, maxVolume: Int) {
+        binding.sliderVolume.isEnabled = !preserveVolume
+        binding.volumeValue.alpha = if (preserveVolume) 0.5f else 1f
+        if (preserveVolume) {
+            binding.volumeValue.text = getString(R.string.settings_restore_preserve_volume)
+        } else {
+            val prefs = AppPreferences(requireContext())
+            binding.volumeValue.text = "${prefs.restoreVolumeLevel.coerceIn(1, maxVolume)} / $maxVolume"
+        }
     }
 
     private fun requestCallDismissFeature() {
@@ -176,5 +215,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             } else {
                 getString(R.string.settings_never)
             }
+
+        if (PermissionHelper.hasBatteryExemption(context)) {
+            binding.settingsBatteryTip.visibility = View.GONE
+        } else {
+            binding.settingsBatteryTip.visibility = View.VISIBLE
+            binding.settingsBatteryTip.text = if (DeviceHelper.isSamsung()) {
+                getString(R.string.settings_samsung_battery_tip)
+            } else {
+                getString(R.string.settings_generic_battery_tip)
+            }
+        }
     }
 }

@@ -1,7 +1,9 @@
 package com.ringerguard.app
 
 import android.content.Context
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 object QuietHoursHelper {
     fun isInQuietHours(context: Context, now: Calendar = Calendar.getInstance()): Boolean {
@@ -26,6 +28,12 @@ object QuietHoursHelper {
     }
 
     fun formatTime(hour: Int, minute: Int): String {
-        return "%02d:%02d".format(hour, minute)
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        return SimpleDateFormat("h:mm a", Locale.getDefault()).format(calendar.time)
     }
 }

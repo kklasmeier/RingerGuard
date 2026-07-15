@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RingerGuard</string>
+    <string name="app_version_short">v%1$s</string>
+    <string name="app_version_footer">RingerGuard v%1$s</string>
     <string name="developer_name">Kevin Klasmeier</string>
     <string name="widget_description">Quickly silence or restore your ringer with a countdown timer.</string>
 
@@ -9,14 +11,23 @@
     <string name="nav_schedule">Schedule</string>
     <string name="nav_settings">Settings</string>
 
-    <string name="status_ringing">Ringing — Your ringer is active</string>
+    <string name="status_ringer_on">Ringer On — Your ringer is active</string>
+    <string name="status_ringer_off">Ringer Off — Will be restored automatically</string>
+    <string name="status_vibrate_only">Vibrate Only — Will be restored automatically</string>
+    <string name="status_volume_low">Volume Low — %1$d / %2$d</string>
+    <string name="status_dnd_on">Do Not Disturb — Ringer may be blocked</string>
     <string name="status_silenced">Silenced — %1$s remaining</string>
-    <string name="status_indefinite">Indefinite — Silence until re-enabled</string>
+    <string name="status_silenced_heading">Silenced</string>
+    <string name="status_indefinite">Silenced Indefinitely</string>
 
     <string name="action_silence_duration">Silence %1$d min</string>
     <string name="action_indefinite">Indefinite</string>
-    <string name="action_ring_now">Ring Now</string>
+    <string name="action_ring_now">Enable Ringer Now</string>
+    <string name="action_ring_now_short">Ringer On</string>
     <string name="action_custom_duration">Custom Duration</string>
+    <string name="custom_duration_hint">Adjust in 5-minute steps</string>
+    <string name="custom_duration_label">%1$d minutes</string>
+    <string name="action_working">Working…</string>
 
     <string name="notification_channel_name">RingerGuard Service</string>
     <string name="notification_channel_desc">Shows ringer protection status</string>
@@ -27,17 +38,38 @@
     <string name="notification_indefinite_title">Silenced Indefinitely</string>
     <string name="notification_indefinite_text">Tap to re-enable</string>
 
-    <string name="widget_ringing">Ringing</string>
+    <string name="widget_ringer_on">Ringer On</string>
+    <string name="widget_ringer_off">Ringer Off</string>
+    <string name="widget_vibrate_only">Vibrate</string>
+    <string name="widget_volume_low">Vol %1$d/%2$d</string>
+    <string name="widget_dnd_on">DND On</string>
     <string name="widget_silenced">Silenced</string>
+    <string name="widget_silenced_countdown">Silenced %1$s</string>
     <string name="widget_indefinite">Indefinite</string>
+    <string name="widget_btn_silence_short">Silence</string>
+    <string name="widget_btn_silence_short_min">%1$dm</string>
+    <string name="widget_btn_indefinite_short">∞</string>
+    <string name="widget_btn_enable_short">On</string>
+    <string name="widget_status_indicator">Ringer status</string>
     <string name="widget_countdown_label">minutes remaining</string>
     <string name="widget_indefinite_label">silence until re-enabled</string>
 
-    <string name="setup_banner_title">Setup required</string>
-    <string name="setup_banner_battery">Allow unrestricted battery use so RingerGuard can restore your ringer reliably.</string>
-    <string name="setup_banner_exact_alarm">Allow exact alarms so scheduled checks work in battery saver mode.</string>
-    <string name="setup_banner_dnd">Grant Do Not Disturb access to restore ringer after DND is enabled.</string>
-    <string name="setup_fix">Fix</string>
+    <string name="setup_banner_title">One-time setup</string>
+    <string name="setup_banner_step">Step %1$d of %2$d</string>
+    <string name="setup_banner_battery">Let RingerGuard run in the background so it can restore your ringer after meetings.</string>
+    <string name="setup_banner_exact_alarm">Allow scheduled checks so RingerGuard works even in battery saver mode.</string>
+    <string name="setup_continue">Continue</string>
+    <string name="setup_open_settings">Open settings</string>
+    <string name="setup_dnd_skip">Skip — not needed</string>
+
+    <string name="setup_battery_dialog_title">Background running (RingerGuard only)</string>
+    <string name="setup_battery_dialog_body">This setting applies only to RingerGuard — not your whole phone and not other apps.\n\nRingerGuard is very lightweight. It checks your ringer every few minutes and should have almost no noticeable effect on battery life.\n\nWithout this, Samsung and Android may stop RingerGuard from working, and you could miss calls.\n\nOn the next screen, scroll to RingerGuard and turn it ON.</string>
+
+    <string name="setup_exact_alarm_dialog_title">Scheduled checks (RingerGuard only)</string>
+    <string name="setup_exact_alarm_dialog_body">This lets RingerGuard run its periodic ringer checks on time, even when battery saver is on.\n\nIt applies only to RingerGuard. Allow it on the next screen.</string>
+
+    <string name="setup_dnd_dialog_title">Optional: Do Not Disturb access</string>
+    <string name="setup_dnd_dialog_body">You do not need this for RingerGuard to work.\n\nOnly enable this if you want RingerGuard to turn off Do Not Disturb when it restores your ringer — for example, if your phone was silenced by DND after a meeting.\n\nIf you manage DND yourself, tap Skip.</string>
 
     <string name="welcome_title">Welcome to RingerGuard</string>
     <string name="welcome_body">RingerGuard keeps your ringer on unless you explicitly silence it. After a grace period, it restores volume automatically.</string>
@@ -69,8 +101,11 @@
 
     <string name="settings_grace_period">Grace period</string>
     <string name="settings_restore_volume">Restore volume level</string>
+    <string name="settings_restore_preserve_volume">Preserve volume from before silence</string>
+    <string name="settings_restore_preserve_volume_hint">When off, ringer restores to full volume. Otherwise ringer restores the previous volume level.</string>
     <string name="settings_check_interval">Check interval</string>
-    <string name="settings_restore_dnd">Disable Do Not Disturb on restore</string>
+    <string name="settings_check_interval_hint">How often RingerGuard checks whether your ringer needs to be restored. Shorter intervals react faster; longer intervals use less battery.</string>
+    <string name="settings_restore_dnd">Disable Do Not Disturb on restore (optional)</string>
     <string name="settings_restore_vibrate">Disable vibrate-only on restore</string>
     <string name="settings_grace_volume">Start grace period on volume change</string>
     <string name="settings_grace_call">Start grace period on call dismiss</string>
@@ -81,7 +116,8 @@
     <string name="settings_phone_state">Phone state permission</string>
     <string name="settings_uptime">Service uptime</string>
     <string name="settings_last_restore">Last auto-restore</string>
-    <string name="settings_samsung_tip">On Samsung devices, also set Settings → Battery → Unrestricted for RingerGuard.</string>
+    <string name="settings_samsung_battery_tip">Samsung: also set Settings → Battery → Unrestricted for RingerGuard.</string>
+    <string name="settings_generic_battery_tip">Tip: allow RingerGuard to run without battery restrictions so it can restore your ringer reliably.</string>
     <string name="settings_active">Active</string>
     <string name="settings_inactive">Inactive</string>
     <string name="settings_granted">Granted</string>
