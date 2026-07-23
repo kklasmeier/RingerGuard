@@ -124,6 +124,8 @@
     <string name="settings_not_granted">Not granted</string>
     <string name="settings_never">Never</string>
     <string name="settings_about">About</string>
+    <string name="settings_privacy_policy">Privacy policy</string>
+    <string name="privacy_policy_url">https://kklasmeier.github.io/RingerGuard/privacy-policy.html</string>
     <string name="settings_version">Version %1$s</string>
 
     <string name="status_active_hours">Right now: Active hours</string>

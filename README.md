@@ -41,6 +41,15 @@ gradlew.bat assembleDebug
 adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
+## Publish to Google Play
+
+See **[docs/PLAY_STORE_GUIDE.md](docs/PLAY_STORE_GUIDE.md)** for the full step-by-step checklist (signing, privacy policy, closed testing, and production release).
+
+Quick reference:
+- Privacy policy: `docs/privacy-policy.html` (host via GitHub Pages)
+- Store listing copy: `docs/store-listing.md`
+- Release build: `gradlew.bat bundleRelease` → upload `app-release.aab`
+
 ## First-run setup
 
 On first launch, RingerGuard will prompt for:

@@ -1,7 +1,9 @@
 package com.ringerguard.app.ui
 
 import android.Manifest
+import android.content.Intent
 import android.media.AudioManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -142,6 +144,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         binding.aboutDeveloper.text = getString(R.string.developer_name)
         binding.aboutVersion.text = getString(R.string.settings_version, BuildConfig.VERSION_NAME)
+        binding.aboutPrivacyPolicy.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.privacy_policy_url))))
+        }
         refreshHealth()
     }
 
